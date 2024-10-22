@@ -10,9 +10,9 @@ export interface CustomButtonProps {
   rightIcon?: string;
   isDisabled?: boolean
 }
-export interface SearchManufacturerProps {
-  manufacturer: string;
-  setManufacturer: (manufacturer: string) => void;
+export interface SearchGenreProps {
+  genre: string;
+  setGenre: (genre: string) => void;
 }
 export interface CarProps {
   city_mpg: number;
@@ -29,12 +29,61 @@ export interface CarProps {
   year: number;
 }
 
+export interface MovieProps {
+  title: string;
+  overview: string;
+  releaseYear: number;
+  genres: [{id:string, name: string}];
+  directors: Array<string>;
+  cast: Array<string>;
+  rating: number;
+  runtime: number;
+  imageSet: {verticalPoster: {
+    w240: string;
+    w360: string;
+    w480: string;
+    w600: string;
+    w720: string;
+    w1440: string;
+  }, horizontalPoster: {
+    w240: string;
+    w360: string;
+    w480: string;
+    w600: string;
+    w720: string;
+    w1440: string;
+  }, horizontalBackdrop: {
+    w240: string;
+    w360: string;
+    w480: string;
+    w600: string;
+    w720: string;
+    w1440: string;
+  }, verticalBackdrop: {
+    w240: string;
+    w360: string;
+    w480: string;
+    w600: string;
+    w720: string;
+    w1440: string;
+  }};
+  // streamingOptions: Array<string>;
+}
+
 export interface FilterProps{
   manufacturer: string;
   model: string;
   year: number;
   fuel: string;
   limit: number;
+}
+
+export interface MoviesFilterProps{ 
+  genres: string;
+  keyword: string;
+  year_max: number;
+  year_min: number;
+  cursor: string;
 }
 
 export interface CustomFilterProps{
@@ -50,4 +99,9 @@ export interface OptionProps{
 export interface ShowMoreProps{
   pageNumber: number;
   isNext: boolean;
+  nextCursor : string;
+}
+
+export interface PreviousProps{
+  cursor: string;
 }

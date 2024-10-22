@@ -6,7 +6,8 @@ const nextConfig = {
       serverComponentsExternalPackages: ["mongoose"],
     },
     images: {
-      domains: ['lh3.googleusercontent.com', 'cdn.imagin.studio'],
+      dangerouslyAllowSVG: true,
+      domains: ['lh3.googleusercontent.com', 'cdn.imagin.studio', 'cdn.movieofthenight.com', 'www.movieofthenight.com'],
     },
     webpack(config) {
       config.experiments = {

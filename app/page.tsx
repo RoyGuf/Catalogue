@@ -2,22 +2,23 @@ import Image from "next/image";
 import { Hero } from "@components";
 import CustomFilter from "@components/CustomFilter";
 import SearchBar from "@components/SearchBar";
-import { fetchCars } from "@utils";
-import CarCard from "@components/CarCard";
-import { fuels, yearsOfProduction } from "@constants";
+import { fetchCars, fetchMovies } from "@utils";
+import MoviesCard from "@components/MoviesCard";
+import { fuels, minYearsOfProduction, maxYearsOfProduction } from "@constants";
 import ShowMore from "@components/ShowMore";
 import { useState } from "react";
+import Previous from "@components/Previous";
 
 export default async function Home({ searchParams }: {searchParams:any}) {
-  const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer || "",
-    year: searchParams.year || 2022,
-    model: searchParams.model || "",
-    limit: searchParams.limit || 10,
-    fuel: searchParams.fuel || "",
-  });
   
-  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars
+  const allMovies = await fetchMovies({
+    genres: searchParams.genres || "",
+    year_max: searchParams.year_max || 2022,
+    year_min: searchParams.year_min || 1990,
+    keyword: searchParams.keyword || "",
+    cursor: searchParams.cursor || "",
+  });
+  const isDataEmpty = !(typeof allMovies === 'object') || Object.keys(allMovies).length < 1 || !allMovies
   
   return (
     <div className="">
@@ -26,37 +27,47 @@ export default async function Home({ searchParams }: {searchParams:any}) {
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         <div className="home__text-container">
           <h1 className="text-4xl font-extrabold">
-            Car Catalogue
+            Movie Catalogue
           </h1>
           <p>
-            Explore the cars you might like
+            Explore the movies you might like
           </p>
         </div>
         <div className="home__filters">
           <SearchBar/>
           <div className="home__filter-container">
-            <CustomFilter title="fuel" options={fuels}/>
-            <CustomFilter title="year" options={yearsOfProduction}/>
+            <CustomFilter title="year_max" options={maxYearsOfProduction}/>
+            <CustomFilter title="year_min" options={minYearsOfProduction}/>
           </div>
         </div>
         
         {!isDataEmpty ? (
           <section>
             <div className="home__cars-wrapper">
-              {allCars?.map((car) => (
+              {/* {allCars?.map((car) => (
                 <CarCard car={car}/>
+              ))} */}
+              {allMovies.shows?.map((movie: any) => (
+                <MoviesCard movie={movie}/>
               ))}
             </div>
 
-            <ShowMore 
-              pageNumber={(searchParams.limit || 10) / 10}
-              isNext={(searchParams.limit || 10) > allCars.length}
-            />
+            <div className="flex justify-center flex-center flex-wrap flex-row-reverse">
+              <ShowMore 
+                pageNumber={(searchParams.limit || 10) / 10}
+                isNext={allMovies.hasMore}
+                nextCursor={allMovies.nextCursor }
+              />
+              <Previous 
+                cursor={searchParams.cursor}
+              />
+              
+            </div>
           </section>
         ): (
           <div className="home__error-container">
             <h2 className="text-black text-xl">Oops, no results</h2>
-            <p>{allCars?.error}</p>
+            <p>{allMovies?.error}</p>
           </div>
         )}
 

@@ -6,23 +6,23 @@ import { ShowMoreProps } from '@types'
 import CustomButton from './CustomButton'
 import { updateSearchParams } from '@utils'
 
-const ShowMore = ({pageNumber, isNext} : ShowMoreProps) => {
+const ShowMore = ({pageNumber, isNext, nextCursor } : ShowMoreProps) => {
   const router = useRouter();
   const handleNavigation = () => {
-    const newLimit = (pageNumber + 1) * 10
-    const newPathName = updateSearchParams("limit", `${newLimit}`);
+    const newPathName = updateSearchParams("cursor", nextCursor);
+    const element     = document.getElementById("discover")
     router.push(newPathName, {scroll: false});
+    element?.scrollIntoView({ behavior: "smooth", block: "start", inline: "center" });
   }
   return (
-    <div className='w-full flex-center gap-5 mt-10'>
-      {!isNext && (
+    <div className='flex-center gap-5 mt-10 mx-2 md:w-1/3 w-full'>
+      {isNext && (
         <CustomButton
           title='Show more'
           btnType='button'
-          containerStyles='bg-primary-blue rounded-full text-white'
+          containerStyles='bg-sky-600 rounded-full text-white'
           handleClick={handleNavigation}
           >
-
         </CustomButton>
       )}
     </div>

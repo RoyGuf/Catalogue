@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState } from 'react'
-import SearchManufacturer from './SearchManufacturer';
+import SearchGenre from './SearchGenre';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import router from 'next/router';
 
 const SearchButton = ({ otherClasses }:{otherClasses: string}) => (
   <button type='submit' className={`-ml-3 z-10 ${otherClasses}`}>
@@ -20,44 +19,36 @@ const SearchButton = ({ otherClasses }:{otherClasses: string}) => (
 const SearchBar = () => {
   // const loading = false;
   // const [loading, setLoading] = useState(false)
-  const [manufacturer, setManufacturer] = useState('')
-  const [model, setModel] = useState('')
+  const [genre, setGenre] = useState('')
+  const [keyword, setKeyword] = useState('')
 
   const router = useRouter();
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-
     e.preventDefault();
-
-    if (!manufacturer || manufacturer.trim() === "" && model.trim() === "") {
+    if ((!genre || genre.trim() === "") && keyword.trim() === "") {
       return alert("Please provide some input");
-    }
-
-    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+    };
+    updateSearchParams(genre.toLowerCase(), keyword.toLowerCase());
 
   };
 
-  const updateSearchParams = (model: string, manufacturer: string) => {
-
+  const updateSearchParams = (genre: string, keyword: string) => {
     // Create a new URLSearchParams object using the current URL search parameters
     const searchParams = new URLSearchParams(window.location.search);
-
-    // Update or delete the 'model' search parameter based on the 'model' value
-    if (model) {
-      searchParams.set("model", model);
+    // Update or delete the 'genres' search parameter based on the 'genres' value
+    if (genre) {
+      searchParams.set("genres", genre);
     } else {
-      searchParams.delete("model");
+      searchParams.delete("genres");
     }
-
-    // Update or delete the 'manufacturer' search parameter based on the 'manufacturer' value
-    if (manufacturer) {
-      searchParams.set("manufacturer", manufacturer);
+    // Update or delete the 'keyword' search parameter based on the 'keyword' value
+    if (keyword) {
+      searchParams.set("keyword", keyword);
     } else {
-       searchParams.delete("manufacturer");
+       searchParams.delete("keyword");
     }
-
     // Generate the new pathname with the updated search parameters
     const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
-
     router.push(newPathname, {scroll: false});
     // setLoading(false)
   };
@@ -67,21 +58,10 @@ const SearchBar = () => {
       handleSearch(e);
       // setLoading(false);
     }}>
-      {/* {loading && (
-          <div className='mt-16 w-full flex-center'>
-            <Image
-              src="/close.svg"
-              alt="loader"
-              width={50}
-              height={50}
-              className="object-contain"
-            />
-          </div>
-        )} */}
       <div className='searchbar__item'>
-        <SearchManufacturer
-          manufacturer={manufacturer}
-          setManufacturer={setManufacturer}
+        <SearchGenre
+          genre={genre}
+          setGenre={setGenre}
         />
         <SearchButton otherClasses="sm:hidden"/>
       </div>
@@ -96,9 +76,9 @@ const SearchBar = () => {
         <input 
           type="text"
           name="model"
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
-          placeholder='Tiguan'
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          placeholder='Marvel'
           className='searchbar__input' />
         <SearchButton otherClasses="sm:hidden"/>
       </div>

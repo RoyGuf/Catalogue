@@ -1,4 +1,4 @@
-import { CarProps, FilterProps } from "@types";
+import { CarProps, FilterProps, MoviesFilterProps } from "@types";
 
 export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, model, limit, fuel } = filters;
@@ -72,4 +72,50 @@ export const updateSearchParams = (type: string, value: string) => {
   // Generate the new pathname with the updated search parameters
   const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
   return newPathname;
+}
+
+export const deleteSearchParams = (type: string) => {
+  // Set the specified search parameter to the given value
+  const newSearchParams = new URLSearchParams(window.location.search);
+
+  // Delete the specified search parameter
+  newSearchParams.delete(type.toLocaleLowerCase());
+
+  // Construct the updated URL pathname with the deleted search parameter
+  const newPathname = `${window.location.pathname}?${newSearchParams.toString()}`;
+
+  return newPathname;
+};
+
+
+
+export async function fetchMovies(filters: MoviesFilterProps) {
+  const { genres, keyword, year_max, year_min, cursor } = filters;
+
+  // Set the required headers for the API request
+  const headers: HeadersInit = {
+    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY || "",
+    "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com",
+  };
+
+  const url = new URL("https://streaming-availability.p.rapidapi.com/shows/search/filters?country=us&series_granularity=episode&order_direction=asc&order_by=original_title&genres_relation=and&output_language=en&show_type=movie");
+
+  url.searchParams.append('genres', genres);
+  url.searchParams.append('keyword', keyword);
+  url.searchParams.append('year_max', `${year_max}`);
+  url.searchParams.append('year_min', `${year_min}`);
+  // url.searchParams.append('zoomLevel', zoomLevel);
+  url.searchParams.append('cursor', cursor);
+  // Set the required headers for the API request
+  const response = await fetch(
+    url,
+    {
+      headers: headers,
+    }
+  );
+
+  // Parse the response as JSON
+  const result = await response.json();
+
+  return result;
 }
