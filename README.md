@@ -1,9 +1,11 @@
 
-# Babysitter-Service-App - Back End
+# Movies Catalogue
 
-The server side of the **Babaysitter-Service-App**, runs on port 8080 by default.
+A Full-Stack Next.js app with information about movies like release year, runtime, cast and more. There is an option to search by genre, release year and free keyword. 
 
 ## Installation
+
+The local app runs on port 3000 by default.
 
 #### Environment Variables
 
