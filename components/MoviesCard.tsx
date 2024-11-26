@@ -36,13 +36,13 @@ const CarCard = ({movie} : CarCardProps) => {
         ★
         </span>
       </p>
-      <div className='relative w-full h-40 my-3 object-contain'>
+      <div className='relative w-full h-40 my-3 object-contain shadow-lg'>
         <Image 
           src={imageSet.horizontalPoster.w720}
           alt="car model"
           fill priority
           sizes='100vw'
-          className='object-contain'
+          className='object-fill shadow-lg '
         />
       </div>
       <div className='relative flex w-full mt-2'>

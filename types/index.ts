@@ -100,6 +100,7 @@ export interface ShowMoreProps{
   pageNumber: number;
   isNext: boolean;
   nextCursor : string;
+  cursor: string;
 }
 
 export interface PreviousProps{

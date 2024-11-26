@@ -57,6 +57,7 @@ export default async function Home({ searchParams }: {searchParams:any}) {
                 pageNumber={(searchParams.limit || 10) / 10}
                 isNext={allMovies.hasMore}
                 nextCursor={allMovies.nextCursor }
+                cursor={searchParams.cursor}
               />
               <Previous 
                 cursor={searchParams.cursor}

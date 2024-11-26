@@ -23,7 +23,7 @@ const SearchManufacturer = ({genre, setGenre}: SearchGenreProps ) => {
         <div className='relative w-full'>
           <ComboboxButton className="absolute top-[14px]">
             <Image 
-            src="/car-logo.svg"
+            src="/movie.svg"
             width={20}
             height={20}
             className="ml-4"
