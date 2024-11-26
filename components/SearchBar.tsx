@@ -18,7 +18,7 @@ const SearchButton = ({ otherClasses }:{otherClasses: string}) => (
 )
 const SearchBar = () => {
   // const loading = false;
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [genre, setGenre] = useState('')
   const [keyword, setKeyword] = useState('')
 
