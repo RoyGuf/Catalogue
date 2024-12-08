@@ -25,6 +25,7 @@ const handler = NextAuth({
             });
     
             session.user.id = sessionUser._id.toString();
+            session.user.savedMovies = sessionUser.savedMovies
     
             return session;
         },
@@ -38,7 +39,8 @@ const handler = NextAuth({
                     await User.create({
                         email: profile.email,
                         username: profile.name.replace(" ","").toLowerCase(),
-                        image: profile.picture
+                        image: profile.picture,
+                        savedMovies: []
                     });
                 };
                return true

@@ -13,6 +13,9 @@ const UserSchema = new Schema({
   },
   image: {
     type: String,
+  },
+  savedMovies: {
+    type: [String],
   }
 });
 

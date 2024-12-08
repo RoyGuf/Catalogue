@@ -21,7 +21,7 @@ const Hero = () => {
             <CustomButton
                 title="Explore Movies"
                 btnType='button'
-                containerStyles="bg-sky-600 text-white rounded-full mt-10"
+                containerStyles="bg-sky-600 text-white rounded-full mt-10 p-4"
                 handleClick={handleScroll}
             />
         </div>

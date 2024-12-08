@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { title } from 'process';
 import { CustomButtonProps } from '@types';
 
-const CustomButton = ({title, handleClick, containerStyles, textStyles, rightIcon}: CustomButtonProps) => {
+const CustomButton = ({title, handleClick, containerStyles, textStyles, rightIcon, rightIconStyles}: CustomButtonProps) => {
   return (
     <button
         disabled={false}
@@ -17,7 +17,7 @@ const CustomButton = ({title, handleClick, containerStyles, textStyles, rightIco
             {title}
         </span>
         {rightIcon && (
-          <div className='relative w-6 h-6'>
+          <div className={`relative w-6 h-6 ${rightIconStyles}`}>
             <Image
               src={rightIcon}
               alt="right icon"

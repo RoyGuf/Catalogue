@@ -7,8 +7,8 @@ import Provider from '@components/Provider'
 
 
 export const metadata: Metadata = {
-  title: "Car rent",
-  description: "Discover the best cars in the worls",
+  title: "Films Vault",
+  description: "Discover the best movies in the worls",
 };
 
 export default function RootLayout({

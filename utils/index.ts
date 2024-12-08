@@ -1,4 +1,4 @@
-import { CarProps, FilterProps, MoviesFilterProps } from "@types";
+import { CarProps, FilterProps, MoviesFilterProps, MovieProps } from "@types";
 
 export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, model, limit, fuel } = filters;
@@ -106,6 +106,32 @@ export async function fetchMovies(filters: MoviesFilterProps) {
   url.searchParams.append('year_min', `${year_min}`);
   // url.searchParams.append('zoomLevel', zoomLevel);
   url.searchParams.append('cursor', cursor);
+  // Set the required headers for the API request
+  const response = await fetch(
+    url,
+    {
+      headers: headers,
+    }
+  );
+
+  // Parse the response as JSON
+  const result = await response.json();
+
+  return result;
+}
+
+export async function fetchMovieById(id: string) {
+  // const { id } = filters;
+
+  // Set the required headers for the API request
+  const headers: HeadersInit = {
+    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY || "",
+    "X-RapidAPI-Host": "streaming-availability.p.rapidapi.com",
+  };
+
+  const url = new URL(`https://streaming-availability.p.rapidapi.com/shows/${id}?output_language=en`);
+
+  url.searchParams.append('id', id);
   // Set the required headers for the API request
   const response = await fetch(
     url,

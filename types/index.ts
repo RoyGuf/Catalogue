@@ -8,6 +8,7 @@ export interface CustomButtonProps {
   btnType: "button" | "sumbit";
   textStyles?: string;
   rightIcon?: string;
+  rightIconStyles?: string;
   isDisabled?: boolean
 }
 export interface SearchGenreProps {
@@ -84,6 +85,10 @@ export interface MoviesFilterProps{
   year_max: number;
   year_min: number;
   cursor: string;
+}
+
+export interface MovieProps{ 
+  id: string 
 }
 
 export interface CustomFilterProps{

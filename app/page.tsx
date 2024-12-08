@@ -3,7 +3,7 @@ import { Hero } from "@components";
 import CustomFilter from "@components/CustomFilter";
 import SearchBar from "@components/SearchBar";
 import { fetchCars, fetchMovies } from "@utils";
-import MoviesCard from "@components/MoviesCard";
+import MovieCard from "@components/MovieCard";
 import { fuels, minYearsOfProduction, maxYearsOfProduction } from "@constants";
 import ShowMore from "@components/ShowMore";
 import { useState } from "react";
@@ -24,7 +24,7 @@ export default async function Home({ searchParams }: {searchParams:any}) {
     <div className="">
       <main className="overflow-hidden">
       <Hero/>  
-      <div className="mt-12 padding-x padding-y max-width" id="discover">
+      <div className="mt-12 padding-x padding-y max-width " id="discover">
         <div className="home__text-container">
           <h1 className="text-4xl font-extrabold">
             Movie Catalogue
@@ -48,7 +48,7 @@ export default async function Home({ searchParams }: {searchParams:any}) {
                 <CarCard car={car}/>
               ))} */}
               {allMovies.shows?.map((movie: any) => (
-                <MoviesCard movie={movie}/>
+                <MovieCard movie={movie}/>
               ))}
             </div>
 

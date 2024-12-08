@@ -29,7 +29,7 @@ const Nav = () => {
   return (
     <header className='w-full absolute z-10'>
       <nav className='max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4'>
-        <Link href="" className='flex justify-center items-center'>
+        <Link href="/" className='flex justify-center items-center'>
           <Image 
           src="/logo.png"
           alt="Car hub logo"
@@ -42,14 +42,14 @@ const Nav = () => {
         <div className="sm:flex hidden">
             {session?.user ? (
                 <div className="flex gap-2 md:gap-5">
-                    <Link href="/"
-                        className="custom-btn text-primary-blue bg-white rounded-full min-w-[130px] border-gray-200 border hover:bg-slate-100">
-                        Home
+                    <Link href="/profile"
+                        className="shadow-md custom-btn text-primary-blue bg-white rounded-full min-w-[130px] border-gray-200 border hover:bg-slate-100">
+                        Profile
                     </Link>
                     <CustomButton
                       title="Sign Out"
                       btnType="button"
-                      containerStyles="text-primary-blue bg-white rounded-full min-w-[130px] border-gray-200 border hover:bg-slate-100"
+                      containerStyles="shadow-md text-primary-blue bg-white rounded-full min-w-[130px] border-gray-200 border hover:bg-slate-100 p-4"
                       handleClick={signOutTrigger}
                     />
                     <Link href="/">
@@ -69,7 +69,7 @@ const Nav = () => {
                     key={provider.id}
                     title="Sign In"
                     btnType="button"
-                    containerStyles="text-primary-blue bg-white rounded-full min-w-[130px] hover:bg-slate-100"
+                    containerStyles=" shadow-md text-primary-blue bg-white rounded-full min-w-[130px] hover:bg-slate-100 p-4"
                     handleClick={signInTrigger}
                   />
                 ))}
@@ -91,7 +91,7 @@ const Nav = () => {
                     {toggleDropdown && (
                         <div className="dropdown border-gray-100 border">
                             <Link
-                                href="/"
+                                href="/profile"
                                 className="dropdown_link w-full text-center"
                                 onClick={() => setToggleDropdown(false)}>
                                 My Profile
@@ -105,7 +105,7 @@ const Nav = () => {
                             <CustomButton
                               title="Sign Out"
                               btnType="button"
-                              containerStyles="mt-5 w-full bg-primary-blue text-white rounded-full mt-10 hover:bg-black-400"
+                              containerStyles="shadow-md mt-5 w-full bg-primary-blue text-white rounded-full mt-10 hover:bg-black-400 p-4"
                               handleClick={() => {
                                 setToggleDropdown(false);
                                 signOutTrigger();
@@ -122,7 +122,7 @@ const Nav = () => {
                     key={provider.id}
                     title="Sign In"
                     btnType="button"
-                    containerStyles="text-primary-blue bg-white rounded-full min-w-[130px] border-gray-100 border hover:bg-slate-100"
+                    containerStyles=" shadow-md text-primary-blue bg-white rounded-full min-w-[130px] border-gray-100 border hover:bg-slate-100 p-4"
                     handleClick={signInTrigger}
                   />
                 ))}
